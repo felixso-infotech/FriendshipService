@@ -100,26 +100,52 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 		return userRepo.findAllUsersExceptFriendRequesOrFriends(userId, name);
 	}
 
+	/**
+	 * Create a well wisher relationship.
+	 *
+	 * @param userId       the registered user id
+	 * @param wellWisherId the registered user id
+	 * @return the well wisher registered user
+	 */
 	@Override
 	public RegisteredUser createWellWisher(String userId, String friendId) {
 
 		return userRepo.createWellWisher(userId, friendId);
 	}
 
+	/**
+	 * Find all well wishers by registered user id
+	 *
+	 * @param userId the registered user id
+	 * @return list of well wisher registered users
+	 */
 	@Override
 	public List<RegisteredUser> findAllWellWishersByUserId(String userId) {
 		// TODO Auto-generated method stub
 		return userRepo.findAllWellWishersByUserId(userId);
 	}
 
+	/**
+	 * Find a registered user.
+	 *
+	 * @param userId the registered user id
+	 * @return the well wisher registered user
+	 */
 	@Override
 	public RegisteredUser findByUserId(String userId) {
 		// TODO Auto-generated method stub
 		return userRepo.findByUserId(userId);
 	}
 
+	/**
+	 * Find mutual well wishers
+	 *
+	 * @param userId1 the registered user id
+	 * @param userId2 the registered user id
+	 * @return list of well wisher registered users
+	 */
 	@Override
-	public List<RegisteredUser> findMutualFriends(String userId1, String userId2) {
+	public List<RegisteredUser> findMutualWellWishers(String userId1, String userId2) {
 		// TODO Auto-generated method stub
 		return userRepo.findMutualFriends(userId1, userId2);
 	}

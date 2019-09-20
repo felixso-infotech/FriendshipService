@@ -64,13 +64,23 @@ public interface RegisteredUserRepository extends Neo4jRepository<RegisteredUser
 	List<RegisteredUser> findAllUsersExceptFriendRequesOrFriends(@Param("userId") String userId,
 			@Param("name") String name);
 
-	// -----------------------------------------------
-	// method to create well wishers
+	/**
+	 * Create a well wisher relationship.
+	 *
+	 * @param userId       the registered user id
+	 * @param wellWisherId the registered user id
+	 * @return the well wisher registered user
+	 */
 	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{friendId}"
 			+ "}) create (u)-[:WELLWISHER_OF]->(w) return w;")
 	RegisteredUser createWellWisher(@Param("userId") String userId, @Param("friendId") String friendId);
 
-	// To find well wishers of registered user by userId
+	/**
+	 * Find all well wishers by registered user id
+	 *
+	 * @param userId the registered user id
+	 * @return list of well wisher registered users
+	 */
 	@Query("MATCH (u:RegisteredUser{userId:" + " {userId} "
 			+ "}),(u)-[r:WELLWISHER_OF]-(wellwishers) RETURN wellwishers;")
 	List<RegisteredUser> findAllWellWishersByUserId(@Param("userId") String userId);

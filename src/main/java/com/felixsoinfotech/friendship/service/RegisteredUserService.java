@@ -32,12 +32,38 @@ public interface RegisteredUserService {
 
 	public List<RegisteredUser> findOthersByname(String userId, String name);
 
-	public RegisteredUser createWellWisher(String userId, String friendId);
+	/**
+	 * Create a well wisher relationship.
+	 *
+	 * @param userId       the registered user id
+	 * @param wellWisherId the registered user id
+	 * @return the well wisher registered user
+	 */
+	public RegisteredUser createWellWisher(String userId, String wellWisherId);
 
+	/**
+	 * Find all well wishers by registered user id
+	 *
+	 * @param userId the registered user id
+	 * @return list of well wisher registered users
+	 */
 	public List<RegisteredUser> findAllWellWishersByUserId(@PathVariable String userId);
 
+	/**
+	 * Find a registered user.
+	 *
+	 * @param userId the registered user id
+	 * @return the well wisher registered user
+	 */
 	public RegisteredUser findByUserId(String userId);
 
-	public List<RegisteredUser> findMutualFriends(String userId1, String userId2);
+	/**
+	 * Find mutual well wishers
+	 *
+	 * @param userId1 the registered user id
+	 * @param userId2 the registered user id
+	 * @return list of well wisher registered userss
+	 */
+	public List<RegisteredUser> findMutualWellWishers(String userId1, String userId2);
 
 }

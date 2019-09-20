@@ -26,14 +26,25 @@ public class RegisteredUserController {
 	@Autowired
 	private RegisteredUserService userService;
 
+	/**
+	 * POST /registeredUser : Create a registered user.
+	 *
+	 * @param user the registeredUser to create
+	 * @return the created RegisteredUser
+	 */
 	@PostMapping("/registeredUser")
-	public RegisteredUser createUser(@RequestBody RegisteredUser user) {
+	public RegisteredUser createRegisteredUser(@RequestBody RegisteredUser user) {
 		log.debug(">>>>>>>>>>>>>>>>user " + user.getName());
 		userService.create(user);
 		return user;
 
 	}
 
+	/**
+	 * GET /registeredUser/{name} : get registered user by name
+	 *
+	 * @param name the registered user name
+	 */
 	@GetMapping("/registeredUser/{name}")
 	public List<RegisteredUser> findUserByName(@PathVariable String name) {
 
@@ -118,27 +129,47 @@ public class RegisteredUserController {
 	}
 
 //------------------------------------------------------------------
-	// To create well wisher of a registered user
+	/**
+	 * GET /createWellWisher/registeredUser/{userId}/{wellWisherId} create well
+	 * wisher relationship
+	 *
+	 * @param userId       the registered user id
+	 * @param wellWisherId the well wisher id
+	 */
 	@PostMapping("/createWellWisher/registeredUser/{userId}/{wellWisherId}")
 	public RegisteredUser createWellWisher(@PathVariable String userId, @PathVariable String wellWisherId) {
 		return userService.createWellWisher(userId, wellWisherId);
 	}
 
-	// To find well wishers of registered user by userId
+	/**
+	 * GET /registeredUser/wellWisher/{userId} : get all well wishers by user id
+	 *
+	 * @param userId the registered user id
+	 */
 	@GetMapping("/registeredUser/wellWisher/{userId}")
 	public List<RegisteredUser> findAllWellWishersByUserId(@PathVariable String userId) {
 		return userService.findAllWellWishersByUserId(userId);
 	}
 
-	// To find well wishers of registered user by userId
+	/**
+	 * GET /registeredUserByUserId/{userId} : get registered user by userId
+	 *
+	 * @param userId the registered user userId
+	 */
 	@GetMapping("/registeredUserByUserId/{userId}")
 	public RegisteredUser findByUserId(@PathVariable String userId) {
 		return userService.findByUserId(userId);
 	}
 
-	// To find mutaul well wishers of two registered user
+	/**
+	 * GET /registeredUserMutaulWellWisher/{userId1}/{userId2} : get mutual well
+	 * wishers of two registered users by userId1,userId2
+	 *
+	 * @param userId1 the registered user user id
+	 * @param userId2 the registered user user id
+	 */
 	@GetMapping("/registeredUserMutaulWellWisher/{userId1}/{userId2}")
 	public List<RegisteredUser> findMutualFriends(@PathVariable String userId1, @PathVariable String userId2) {
-		return userService.findMutualFriends(userId1, userId2);
+		return userService.findMutualWellWishers(userId1, userId2);
 	}
 }
