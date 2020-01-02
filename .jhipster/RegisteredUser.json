@@ -1,0 +1,33 @@
+{
+    "name": "RegisteredUser",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191231082710",
+    "javadoc": "RegisteredUser entity.\\n@author Sarangibalu",
+    "entityTableName": "registered_user",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "JhipsterMysqlNeo4jSample",
+    "applications": "*",
+    "microserviceName": "JhipsterMysqlNeo4jSample"
+}
