@@ -1,0 +1,140 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+logging:
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+   level:
+      ROOT: DEBUG
+      io.github.jhipster: DEBUG
+      com.felixso_infotech: DEBUG
+spring:
+   profiles:
+      active: dev
+      include:
+      - swagger
+# Uncomment to activate TLS for the dev profile
+   devtools:
+      restart:
+         enabled: true
+#- tls
+         additional-exclude: static/**
+      livereload:
+         enabled: false # we use Webpack dev server + BrowserSync for livereload
+   jackson:
+      serialization:
+         indent-output: true
+   datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/JhipsterMysqlNeo4jSample?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      username: root
+      password: root
+      hikari:
+         poolName: Hikari
+         auto-commit: false
+         data-source-properties:
+            cachePrepStmts: true
+            prepStmtCacheSize: 250
+            prepStmtCacheSqlLimit: 2048
+            useServerPrepStmts: true
+   data: 
+      neo4j:
+         uri: bolt://localhost:7687
+         username: neo4j
+         password: admin123
+   jpa:
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      database: MYSQL
+      show-sql: true
+      properties:
+         hibernate.id.new_generator_mappings: true
+         hibernate.connection.provider_disables_autocommit: true
+         hibernate.cache.use_second_level_cache: true
+         hibernate.cache.use_query_cache: false
+         hibernate.generate_statistics: false
+         hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+         hibernate.cache.hazelcast.instance_name: JhipsterMysqlNeo4jSample
+         hibernate.cache.use_minimal_puts: true
+         hibernate.cache.hazelcast.use_lite_member: true
+   liquibase:
+# Remove 'faker' if you do not want the sample data to be loaded automatically
+      contexts: dev, faker
+   mail:
+      host: localhost
+      port: 25
+      username: null
+      password: null
+   messages:
+      cache-duration: PT1S # 1 second, see the ISO 8601 standard
+   thymeleaf:
+      cache: false
+   sleuth:
+      sampler:
+         probability: 1 # report 100% of traces
+   zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
+      base-url: http://localhost:9411
+      enabled: false
+      locator:
+         discovery:
+            enabled: true
+server:
+   port: 8082
+# ===================================================================
+jhipster:
+   cache: # Cache configuration
+      hazelcast: # Hazelcast distributed cache
+         time-to-live-seconds: 3600
+         backup-count: 1
+         management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+            enabled: false
+            update-interval: 3
+            url: http://localhost:8180/mancenter
+# CORS is disabled by default on microservices, as you should access them through a gateway.
+   mail: # specific JHipster mail property, for standard properties see MailProperties
+      base-url: http://127.0.0.1:8082
+   metrics:
+      logs: # Reports metrics in the logs
+         enabled: false
+         report-frequency: 60 # in seconds
+   logging:
+# If you want to enable it, please uncomment the configuration below.
+# cors:
+#     allowed-origins: "*"
+#     allowed-methods: "*"
+#     allowed-headers: "*"
+#     exposed-headers: "Authorization,Link,X-Total-Count"
+#     allow-credentials: true
+#     max-age: 1800
+      use-json-format: false # By default, logs are not in Json format
+      logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+         enabled: false
+         host: localhost
+         port: 5000
+         queue-size: 512
+   audit-events:
+      retention-period: 30 # Number of days before audit events are deleted.
+# ----------------
+# Orphan comments:
+# ----------------
+# Was at begin of line:132 :# ===================================================================
+# Was at begin of line:133 :# Application specific properties
+# Was at begin of line:134 :# Add your own application properties here, see the ApplicationProperties class
+# Was at begin of line:135 :# to have type-safe configuration, like in the JHipsterProperties above
+# Was at begin of line:136 :#
+# Was at begin of line:137 :# More documentation is available at:
+# Was at begin of line:138 :# https://www.jhipster.tech/common-application-properties/
+# Was at begin of line:139 :# ===================================================================
+# Was at begin of line:141 :# application:

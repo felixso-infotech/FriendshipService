@@ -1,0 +1,12 @@
+/**
+ * RegisteredUser entity.
+ * @author Sarangibalu  
+ */
+entity RegisteredUser{
+  firstName String,
+  lastName String,
+  userId String unique 
+}
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl

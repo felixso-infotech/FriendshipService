@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.felixso_infotech",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.6.0",
+    "applicationType": "microservice",
+    "baseName": "JhipsterMysqlNeo4jSample",
+    "packageName": "com.felixso_infotech",
+    "packageFolder": "com/felixso_infotech",
+    "serverPort": "8082",
+    "authenticationType": "oauth2",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MzAwMGIyM2M0MzAwZDVlYTBiZGYyMjgzNTc4ZjU0ODhlMGMxZGVmNTQyNGNhZTE0YjBhNTJiOGQ1ODBkZTU5MzFlZjM5NThhZTNlMDU4NDZjODZkOWViNDVmNjcyNDQxMTliYjVmZTI5MDFmNzY5MDliYTNiZGU3ZDAzYWQ1ZDk=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1577708260439,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "en",
+    "languages": ["en", "hi"],
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
