@@ -21,19 +21,9 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param userId the registered user id
 	 * @return registered users
 	 */
-	RegisteredUser findByUserId(@Param("userId") String userId);
-
+	RegisteredUser findByUserId(@Param("userId") String userId);	
 	
-	/**
-	 * save registeredUser by registered user 
-	 *
-	 * @param registereduser the registered user
-	 * @return registered users
-	 */
-	
-	RegisteredUser save(RegisteredUser registeredUser);
-	
-	
+		
 	/**
 	 * Create a well wisher relationship.
 	 *
@@ -42,8 +32,11 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @return the well wisher registered user
 	 */
 	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{wellWisherId}"
-			+ "}) create (u)-[r:WELLWISHER_OF]->(w) return w,r,u;")
-	RegisteredUser createWellWisher(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
+			+ "}) create (u)-[:WELLWISHER_OF]->(w) MERGE (u)-[p:WELLWISHER_OF]->(w) \r\n" + 
+			"ON CREATE SET p.alreadyExisted=false \r\n" + 
+			"ON MATCH SET p.alreadyExisted=true \r\n" + 
+			"RETURN p.alreadyExisted;")
+	Boolean createWellWisher(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
 	
 	
 	/**
@@ -54,8 +47,11 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @return the well wisher registered user
 	 */
 	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{wellWisherId}"
-			+ "}) create (u)-[r:WELLWISHING_OF]->(w) return u,w;")
-	RegisteredUser createWellWishing(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
+			+ "}) create (u)-[:WELLWISHING_OF]->(w)  MERGE (u)-[p:WELLWISHING_OF]->(w) \r\n" +  
+			"ON CREATE SET p.alreadyExisted=false \r\n" + 
+			"ON MATCH SET p.alreadyExisted=true \r\n" +  
+			"RETURN p.alreadyExisted;")
+	Boolean createWellWishing(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
 	
 	
 	/**
@@ -110,6 +106,25 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 */
 	@Query("MATCH (p:RegisteredUser) WHERE exists(p.userId) RETURN p.name,p.userId")
 	RegisteredUser getRegisteredUserIsExist(@Param("userId") String userId);
+	
+	/**
+	 * save registeredUser by registered user 
+	 *
+	 * @param registereduser the registered user
+	 * @return registered users
+	 */
+	@Query("CREATE (r:RegisteredUser {firstName: " + "{firstName}" + ", userId:"+"{userId}" + "}) return r;")
+	RegisteredUser saveNewUser(@Param("firstName") String firstName,@Param("userId") String userId);
+	
+	
+	/**
+	 * save registeredUser by registered user 
+	 *
+	 * @param registereduser the registered user
+	 * @return registered users
+	 */
+	@Query("CREATE (r:RegisteredUser {firstName:\"sanila\", userId:\"sanila\"})return r;")
+	RegisteredUser saveNew(RegisteredUser registeredUser);
 	
 	
 	

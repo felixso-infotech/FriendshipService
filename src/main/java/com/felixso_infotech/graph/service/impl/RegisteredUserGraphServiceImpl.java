@@ -34,22 +34,43 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	 * @return the well wisher registered user
 	 */
 	@Override
-	public RegisteredUser createWellWisherAndWellWishing(RegisteredUser currentUser,RegisteredUser registeredUser) {
+	public String createWellWisherAndWellWishing(RegisteredUser currentUser,RegisteredUser registeredUser) {
 		
-		//log.debug("request to create welwisher-wellwishing  currentuser:" + currentUser + " registeredUser:" + registeredUser);
+		log.debug("request to create welwisher-wellwishing  currentuser:" + currentUser + " registeredUser:" + registeredUser);
 		
 		RegisteredUser currentUser1 = registeredUserGraphRepository.findByUserId( currentUser.getUserId());
-		if(currentUser1 != null)
-			currentUser1=registeredUserGraphRepository.save(currentUser1);
+		
+		System.out.println("******************************findByUserId method : \t "+currentUser1);
+		 
+		if(currentUser1 == null)
+			currentUser1=registeredUserGraphRepository.save(currentUser);
+				
 				
 	    RegisteredUser	registeredUser1 = registeredUserGraphRepository.findByUserId(registeredUser.getUserId());
-	    if(registeredUser1 != null)
-	    	registeredUser1=registeredUserGraphRepository.save(registeredUser1);
+	    
+	    System.out.println("******************************findByUserId method : \t "+registeredUser1);
+	    
+	    if(registeredUser1 == null)
+	    	registeredUser1=registeredUserGraphRepository.save(registeredUser);
 	    
 	    //registeredUserGraphRepository.createWellWishing(currentUser.getUserId(),registeredUser.getUserId());
+	    //registeredUserGraphRepository.save(currentUser);
+	    //return registeredUserGraphRepository.save(registeredUser);
 
-	    return registeredUserGraphRepository.createWellWisher(currentUser.getUserId(),registeredUser.getUserId());
-		
+	    Boolean isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
+	    Boolean isWelwishing = false;
+	    
+	    if(isWelwisher)
+	    {
+	    	  isWelwishing = registeredUserGraphRepository.createWellWishing(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	  System.out.println("******************************"+isWelwishing);
+	    	  
+	    } 	  
+	    
+	    if(isWelwisher==true && isWelwishing==true)
+		    return "Sucess";
+	    else
+	    	return "fail";
 		
 	}
 

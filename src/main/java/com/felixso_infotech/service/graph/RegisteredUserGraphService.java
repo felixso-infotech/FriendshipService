@@ -13,7 +13,7 @@ public interface RegisteredUserGraphService {
 	 * @param wellWisherId the registered user id
 	 * @return the well wisher registered user
 	 */
-	public RegisteredUser createWellWisherAndWellWishing(RegisteredUser currentUser,RegisteredUser registeredUser);
+	public String createWellWisherAndWellWishing(RegisteredUser currentUser,RegisteredUser registeredUser);
 		
 	/**
 	 * Find all well wishers by registered user id
