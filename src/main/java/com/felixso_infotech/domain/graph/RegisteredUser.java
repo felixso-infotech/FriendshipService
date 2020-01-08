@@ -56,6 +56,12 @@ public class RegisteredUser {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "RegisteredUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userId=" + userId
+				+ "]";
+	}
+
 	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

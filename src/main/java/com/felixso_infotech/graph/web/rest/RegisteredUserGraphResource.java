@@ -50,15 +50,21 @@ public class RegisteredUserGraphResource {
 	 *
 	 */
 	@PostMapping("/createWellWisher-wellWishing/registeredUser/")
-	public ResponseEntity<RegisteredUser> createWellWisherAndWellWishing(@RequestBody RegisteredUserModel registeredUserModel) throws URISyntaxException {
+	public String createWellWisherAndWellWishing(@RequestBody RegisteredUserModel registeredUserModel) throws URISyntaxException {
 		
 		log.debug("request to create welwisher-wellwishing  currentuser:" + registeredUserModel.getCurrentUser() + " registeredUser:" + registeredUserModel.getRegisteredUser());
 		
-		RegisteredUser result = registeredUserGraphService.createWellWisherAndWellWishing(registeredUserModel.getCurrentUser(), registeredUserModel.getRegisteredUser());
+		return registeredUserGraphService.createWellWisherAndWellWishing(registeredUserModel.getCurrentUser(), registeredUserModel.getRegisteredUser());
 		
-		return ResponseEntity.created(new URI("/api/registered-users/"))
-	            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME,"result"))
-	            .body(result);
+		/*
+		 * RegisteredUser result =
+		 * registeredUserGraphService.createWellWisherAndWellWishing(registeredUserModel
+		 * .getCurrentUser(), registeredUserModel.getRegisteredUser());
+		 * 
+		 * return ResponseEntity.created(new URI("/api/registered-users/"))
+		 * .headers(HeaderUtil.createEntityCreationAlert(applicationName, true,
+		 * ENTITY_NAME,"result")) .body(result);
+		 */
 	}
 
 	/**
