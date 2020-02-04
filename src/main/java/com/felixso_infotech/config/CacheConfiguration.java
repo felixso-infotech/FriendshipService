@@ -44,13 +44,13 @@ public class CacheConfiguration implements DisposableBean {
     @Bean
     public HazelcastInstance hazelcastInstance(JHipsterProperties jHipsterProperties) {
         log.debug("Configuring Hazelcast");
-        HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("JhipsterMysqlNeo4jSample");
+        HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("FriendshipService");
         if (hazelCastInstance != null) {
             log.debug("Hazelcast already initialized");
             return hazelCastInstance;
         }
         Config config = new Config();
-        config.setInstanceName("JhipsterMysqlNeo4jSample");
+        config.setInstanceName("FriendshipService");
         config.getNetworkConfig().setPort(5701);
         config.getNetworkConfig().setPortAutoIncrement(true);
 

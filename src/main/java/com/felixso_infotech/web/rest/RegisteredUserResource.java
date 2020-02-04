@@ -34,7 +34,7 @@ public class RegisteredUserResource {
 
     private final Logger log = LoggerFactory.getLogger(RegisteredUserResource.class);
 
-    private static final String ENTITY_NAME = "jhipsterMysqlNeo4JSampleRegisteredUser";
+    private static final String ENTITY_NAME = "FriendshipServiceRegisteredUser";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

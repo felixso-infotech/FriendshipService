@@ -1,6 +1,6 @@
 package com.felixso_infotech.repository;
 
-import com.felixso_infotech.JhipsterMysqlNeo4JSampleApp;
+import com.felixso_infotech.FriendshipServiceApp;
 import com.felixso_infotech.config.Constants;
 import com.felixso_infotech.config.TestSecurityConfiguration;
 import com.felixso_infotech.config.audit.AuditEventConverter;
@@ -28,7 +28,7 @@ import static com.felixso_infotech.repository.CustomAuditEventRepository.EVENT_D
 /**
  * Integration tests for {@link CustomAuditEventRepository}.
  */
-@SpringBootTest(classes = {JhipsterMysqlNeo4JSampleApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = {FriendshipServiceApp.class, TestSecurityConfiguration.class})
 @Transactional
 public class CustomAuditEventRepositoryIT {
 

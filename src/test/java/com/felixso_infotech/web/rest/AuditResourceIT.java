@@ -1,6 +1,6 @@
 package com.felixso_infotech.web.rest;
 
-import com.felixso_infotech.JhipsterMysqlNeo4JSampleApp;
+import com.felixso_infotech.FriendshipServiceApp;
 import com.felixso_infotech.config.TestSecurityConfiguration;
 import io.github.jhipster.config.JHipsterProperties;
 import com.felixso_infotech.config.audit.AuditEventConverter;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link AuditResource} REST controller.
  */
-@SpringBootTest(classes = {JhipsterMysqlNeo4JSampleApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = {FriendshipServiceApp.class, TestSecurityConfiguration.class})
 @Transactional
 public class AuditResourceIT {
 

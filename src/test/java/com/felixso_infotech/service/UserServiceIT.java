@@ -1,6 +1,6 @@
 package com.felixso_infotech.service;
 
-import com.felixso_infotech.JhipsterMysqlNeo4JSampleApp;
+import com.felixso_infotech.FriendshipServiceApp;
 import com.felixso_infotech.config.Constants;
 import com.felixso_infotech.config.TestSecurityConfiguration;
 import com.felixso_infotech.domain.User;
@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link UserService}.
  */
-@SpringBootTest(classes = {JhipsterMysqlNeo4JSampleApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = {FriendshipServiceApp.class, TestSecurityConfiguration.class})
 @Transactional
 public class UserServiceIT {
 

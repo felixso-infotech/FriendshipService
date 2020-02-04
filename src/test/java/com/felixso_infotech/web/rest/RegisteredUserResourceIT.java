@@ -1,6 +1,6 @@
 package com.felixso_infotech.web.rest;
 
-import com.felixso_infotech.JhipsterMysqlNeo4JSampleApp;
+import com.felixso_infotech.FriendshipServiceApp;
 import com.felixso_infotech.config.TestSecurityConfiguration;
 import com.felixso_infotech.domain.RegisteredUser;
 import com.felixso_infotech.repository.RegisteredUserRepository;
@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link RegisteredUserResource} REST controller.
  */
-@SpringBootTest(classes = {JhipsterMysqlNeo4JSampleApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = {FriendshipServiceApp.class, TestSecurityConfiguration.class})
 public class RegisteredUserResourceIT {
 
     private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";

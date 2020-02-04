@@ -1,6 +1,6 @@
 package com.felixso_infotech.config.timezone;
 
-import com.felixso_infotech.JhipsterMysqlNeo4JSampleApp;
+import com.felixso_infotech.FriendshipServiceApp;
 import com.felixso_infotech.config.TestSecurityConfiguration;
 import com.felixso_infotech.repository.timezone.DateTimeWrapper;
 import com.felixso_infotech.repository.timezone.DateTimeWrapperRepository;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for the UTC Hibernate configuration.
  */
-@SpringBootTest(classes = {JhipsterMysqlNeo4JSampleApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = {FriendshipServiceApp.class, TestSecurityConfiguration.class})
 public class HibernateTimeZoneIT {
 
     @Autowired

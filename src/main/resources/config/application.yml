@@ -78,7 +78,7 @@ management:
 
 spring:
   application:
-    name: JhipsterMysqlNeo4jSample
+    name: FriendshipService
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -135,7 +135,7 @@ spring:
 
 server:
   servlet:
-    context-path: /services/${spring.application.name}
+    context-path: /${spring.application.name}
     session:
       cookie:
         http-only: true
@@ -153,7 +153,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'jhipsterMysqlNeo4JSampleApp'
+    name: 'FriendshipServiceApp'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #     allowed-origins: "*"
@@ -163,11 +163,11 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: JhipsterMysqlNeo4jSample@localhost
+    from: FriendshipService@localhost
   swagger:
     default-include-pattern: /api/.*
-    title: JhipsterMysqlNeo4jSample API
-    description: JhipsterMysqlNeo4jSample API documentation
+    title: FriendshipService API
+    description: FriendshipService API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:

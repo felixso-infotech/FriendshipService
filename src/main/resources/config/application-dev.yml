@@ -35,7 +35,7 @@ spring:
    datasource:
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/JhipsterMysqlNeo4jSample?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      url: jdbc:mysql://localhost:3306/friendshipservice?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       username: root
       password: root
       hikari:
@@ -62,7 +62,7 @@ spring:
          hibernate.cache.use_query_cache: false
          hibernate.generate_statistics: false
          hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-         hibernate.cache.hazelcast.instance_name: JhipsterMysqlNeo4jSample
+         hibernate.cache.hazelcast.instance_name: FriendshipService
          hibernate.cache.use_minimal_puts: true
          hibernate.cache.hazelcast.use_lite_member: true
    liquibase:
@@ -87,7 +87,7 @@ spring:
          discovery:
             enabled: true
 server:
-   port: 8082
+   port: 8040
 # ===================================================================
 jhipster:
    cache: # Cache configuration
@@ -104,7 +104,7 @@ jhipster:
             url: http://localhost:8180/mancenter
 # CORS is disabled by default on microservices, as you should access them through a gateway.
    mail: # specific JHipster mail property, for standard properties see MailProperties
-      base-url: http://127.0.0.1:8082
+      base-url: http://127.0.0.1:8040
    metrics:
       logs: # Reports metrics in the logs
          enabled: false

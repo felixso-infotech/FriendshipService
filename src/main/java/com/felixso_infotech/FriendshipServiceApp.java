@@ -28,18 +28,18 @@ import java.util.Collection;
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
 
 @EnableAutoConfiguration(exclude = { Neo4jDataAutoConfiguration.class, DataSourceAutoConfiguration.class })
-public class JhipsterMysqlNeo4JSampleApp implements InitializingBean {
+public class FriendshipServiceApp implements InitializingBean {
 
-	private static final Logger log = LoggerFactory.getLogger(JhipsterMysqlNeo4JSampleApp.class);
+	private static final Logger log = LoggerFactory.getLogger(FriendshipServiceApp.class);
 
 	private final Environment env;
 
-	public JhipsterMysqlNeo4JSampleApp(Environment env) {
+	public FriendshipServiceApp(Environment env) {
 		this.env = env;
 	}
 
 	/**
-	 * Initializes JhipsterMysqlNeo4jSample.
+	 * Initializes FriendshipService.
 	 * <p>
 	 * Spring profiles can be configured with a program argument
 	 * --spring.profiles.active=your-active-profile
@@ -68,7 +68,7 @@ public class JhipsterMysqlNeo4JSampleApp implements InitializingBean {
 	 * @param args the command line arguments.
 	 */
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(JhipsterMysqlNeo4JSampleApp.class);
+		SpringApplication app = new SpringApplication(FriendshipServiceApp.class);
 		DefaultProfileUtil.addDefaultProfile(app);
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
