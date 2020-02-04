@@ -127,11 +127,11 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://35.196.65.11:8099/auth/realms/karma
+            issuer-uri: http://35.211.83.193:8099/auth/realms/karma
         registration:
           oidc:
             client-id: karma-app
-            client-secret: 
+            client-secret: 6b43e437-94a7-44f6-8d59-b498d00a0bc2
 
 server:
   servlet:

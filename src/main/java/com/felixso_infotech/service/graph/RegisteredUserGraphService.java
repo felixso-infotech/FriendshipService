@@ -2,6 +2,7 @@ package com.felixso_infotech.service.graph;
 
 import java.util.List;
 
+
 import com.felixso_infotech.domain.graph.RegisteredUser;
 
 public interface RegisteredUserGraphService {
@@ -46,6 +47,36 @@ public interface RegisteredUserGraphService {
 	 * @return count of well wishing registered users
 	 */
 	Long countOfWellWishingByUserId(String userId);
+
+    RegisteredUser getRegisteredUserIsExist(String userId);
+    
+    /**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wishing registered user
+	 */
+	public Boolean checkRegisteredUserIsFollowing(String userId, String wellWishingId);
+	
+	/**
+	 * Check a well wisher relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wisher registered user
+	 */
+	public Boolean checkRegisteredUserIsFollowed(String userId, String wellWisherId);
+
+
+	/**
+	 * Check a Friend relationship.
+	 *
+	 * @param registeredUserOneUserId the registered user id
+	 * @param registeredUserTwoUserId the registered user id
+	 * @return the FRIEND_OF registered user
+	 */
+	public Boolean checkRegisteredUsersAreFriends(String registeredUserOneUserId, String registeredUserTwoUserId);
 	
 
 	

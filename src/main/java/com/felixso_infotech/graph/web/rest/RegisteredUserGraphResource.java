@@ -1,13 +1,13 @@
 package com.felixso_infotech.graph.web.rest;
 
-import java.net.URI;
+
 import java.net.URISyntaxException;
 import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +19,6 @@ import com.felixso_infotech.domain.graph.RegisteredUser;
 import com.felixso_infotech.domain.graph.RegisteredUserModel;
 import com.felixso_infotech.service.graph.RegisteredUserGraphService;
 
-import io.github.jhipster.web.util.HeaderUtil;
 
 
 /**
@@ -31,7 +30,7 @@ public class RegisteredUserGraphResource {
 	
 	private final Logger log = LoggerFactory.getLogger(RegisteredUserGraphResource.class);
 	
-	private static final String ENTITY_NAME = "jhipsterMysqlNeo4JSampleRegisteredUser";
+	
 	
 	@Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -56,15 +55,6 @@ public class RegisteredUserGraphResource {
 		
 		return registeredUserGraphService.createWellWisherAndWellWishing(registeredUserModel.getCurrentUser(), registeredUserModel.getRegisteredUser());
 		
-		/*
-		 * RegisteredUser result =
-		 * registeredUserGraphService.createWellWisherAndWellWishing(registeredUserModel
-		 * .getCurrentUser(), registeredUserModel.getRegisteredUser());
-		 * 
-		 * return ResponseEntity.created(new URI("/api/registered-users/"))
-		 * .headers(HeaderUtil.createEntityCreationAlert(applicationName, true,
-		 * ENTITY_NAME,"result")) .body(result);
-		 */
 	}
 
 	/**
@@ -106,5 +96,58 @@ public class RegisteredUserGraphResource {
 	public Long countOfWellWishingByUserId(@PathVariable String userId) {
 		return registeredUserGraphService.countOfWellWishingByUserId(userId);
 	}
+	
+	/**
+	 * GET /registeredUser/wellWishing/{userId} : get all well wishers by user id
+	 *
+	 * @param userId the registered user id
+	 */
+	@GetMapping("/registeredUser/is-exist/{userId}")
+	public RegisteredUser getRegisteredUserIsExist(@PathVariable String userId) {
+		return registeredUserGraphService.getRegisteredUserIsExist(userId);
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wishing registered user
+	 */
+	@GetMapping("/registeredUser/Is-Following/{userId}/{wellWishingId}")
+	public Boolean checkRegisteredUserIsFollowing(@PathVariable String userId, @PathVariable String wellWishingId)
+	{
+		return registeredUserGraphService.checkRegisteredUserIsFollowing(userId, wellWishingId);
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wisher registered user
+	 */
+	@GetMapping("/registeredUser/Is-Followed/{userId}/{wellWisherId}")
+	public Boolean checkRegisteredUserIsFollowed(@PathVariable String userId, @PathVariable String wellWisherId)
+	{
+		return registeredUserGraphService.checkRegisteredUserIsFollowed(userId, wellWisherId);
+	}
+	
+	/**
+	 * Check a Friend relationship.
+	 *
+	 * @param registeredUserOneUserId the registered user id
+	 * @param registeredUserTwoUserId the registered user id
+	 * @return the FRIEND_OF registered user
+	 */
+	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserOneUserId}/{registeredUserTwoUserId}")
+	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserOneUserId,@PathVariable String registeredUserTwoUserId)
+	{
+		return registeredUserGraphService.checkRegisteredUsersAreFriends(registeredUserOneUserId,registeredUserTwoUserId);
+	}
+
+	
+	
+	
 	
 }

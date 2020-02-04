@@ -4,6 +4,7 @@ package com.felixso_infotech.graph.service.impl;
 
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,26 +49,35 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 				
 	    RegisteredUser	registeredUser1 = registeredUserGraphRepository.findByUserId(registeredUser.getUserId());
 	    
-	    System.out.println("******************************findByUserId method : \t "+registeredUser1);
+	   // System.out.println("******************************findByUserId method : \t "+registeredUser1);
 	    
 	    if(registeredUser1 == null)
 	    	registeredUser1=registeredUserGraphRepository.save(registeredUser);
 	    
-	    //registeredUserGraphRepository.createWellWishing(currentUser.getUserId(),registeredUser.getUserId());
-	    //registeredUserGraphRepository.save(currentUser);
-	    //return registeredUserGraphRepository.save(registeredUser);
-
-	    Boolean isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
-	    Boolean isWelwishing = false;
+	    Boolean isWelwishing = false;	   
 	    
-	    if(isWelwisher)
-	    {
+    Boolean isWelwisher = registeredUserGraphRepository.checkRegisteredUserIsFollowed(currentUser1.getUserId(),registeredUser1.getUserId());
+    if(isWelwisher == false)
+     {
+            isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
+        	    
+	      if(isWelwisher)
+	      {
 	    	  isWelwishing = registeredUserGraphRepository.createWellWishing(currentUser1.getUserId(),registeredUser1.getUserId());
-	    	  System.out.println("******************************"+isWelwishing);
+	    	  //System.out.println("******************************"+isWelwishing);
 	    	  
-	    } 	  
+	    	  Boolean isWelwishingUser = registeredUserGraphRepository.checkRegisteredUserIsFollowing(registeredUser1.getUserId(), currentUser1.getUserId());;
+	    	  
+	    	     if(isWelwishing && isWelwishingUser)
+	    	     {
+	    	    	 registeredUserGraphRepository.createWellwishingsAsFriend(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	     }
+	    	  
+	      } 	 
 	    
-	    if(isWelwisher==true && isWelwishing==true)
+       }   
+	    
+	    if(isWelwisher && isWelwishing)
 		    return "Sucess";
 	    else
 	    	return "fail";
@@ -127,6 +137,51 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 		
 		log.debug("get count welwishing:" + userId );
 		return registeredUserGraphRepository.countOfWellWishingByUserId(userId);
+	}
+
+	@Override
+	public RegisteredUser getRegisteredUserIsExist(String userId) {
+		log.debug("get registeredUser IsExist:" + userId );
+		return registeredUserGraphRepository.getRegisteredUserIsExist(userId);
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wishing registered user
+	 */
+	@Override
+	public Boolean checkRegisteredUserIsFollowing(String userId, String wellWishingId) {
+		log.debug("get checkRegisteredUserIsFollowed:" + userId + " "+wellWishingId);
+		return registeredUserGraphRepository.checkRegisteredUserIsFollowing(userId, wellWishingId);
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wishing registered user
+	 */
+	@Override
+	public Boolean checkRegisteredUserIsFollowed(String userId, String wellWisherId) {
+		log.debug("get checkRegisteredUserIsFollowed:" + userId + " "+wellWisherId);
+		return registeredUserGraphRepository.checkRegisteredUserIsFollowed(userId, wellWisherId);
+	}
+
+	/**
+	 * Check a Friend relationship.
+	 *
+	 * @param registeredUserOneUserId the registered user id
+	 * @param registeredUserTwoUserId the registered user id
+	 * @return the FRIEND_OF registered user
+	 */
+	@Override
+	public Boolean checkRegisteredUsersAreFriends(String registeredUserOneUserId, String registeredUserTwoUserId) {
+		log.debug("get checkRegisteredUserIsFollowed:" + registeredUserOneUserId + " "+registeredUserTwoUserId);
+		return registeredUserGraphRepository.checkRegisteredUsersAreFriends(registeredUserOneUserId, registeredUserTwoUserId);
 	}
 	
 	
