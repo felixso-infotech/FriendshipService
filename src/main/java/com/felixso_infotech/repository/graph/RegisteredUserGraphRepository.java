@@ -41,11 +41,11 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param wellWishingId the registered user id
 	 * @return the well wisher registered user
 	 */
-	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{wellWisherId}"
+	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{wellWishingId}"
 			+ "}) create (u)-[:WELLWISHING_OF]->(w)  MERGE (u)-[p:WELLWISHING_OF]->(w) \r\n"
 			+ "ON CREATE SET p.alreadyExisted=false \r\n" + "ON MATCH SET p.alreadyExisted=true \r\n"
 			+ "RETURN p.alreadyExisted;")
-	Boolean createWellWishing(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
+	Boolean createWellWishing(@Param("userId") String userId, @Param("wellWishingId") String wellWishingId);
 	
 	/**
 	 * Create a FRIEND relationship.
@@ -55,10 +55,10 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @return the FRIEND_OF registered user
 	 */	
 	@Query("match (u:RegisteredUser{userId:" + "{userId}" + "}),(w:RegisteredUser{userId:" + "{userId2}"
-			+ "}) create (u)-[:FRIEND_OF]-(w)  MERGE (u)-[p:FRIEND_OF]-(w) \r\n"
+			+ "}) create (u)-[:FRIEND_OF]->(w)  MERGE (u)-[p:FRIEND_OF]->(w) \r\n"
 			+ "ON CREATE SET p.alreadyExisted=false \r\n" + "ON MATCH SET p.alreadyExisted=true \r\n"
 			+ "RETURN p.alreadyExisted;")	
-	Boolean createWellwishingsAsFriend(@Param("userId")String userId,@Param("userId") String userId2);
+	Boolean createWellwishingsAsFriend(@Param("userId")String userId,@Param("userId2") String userId2);
 	
 
 	/**	
@@ -132,7 +132,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @return the well wishing registered user
 	 */
 	@Query("MATCH (u:RegisteredUser{userId:" + "{userId}"+ "}),(w:RegisteredUser{userId:" + "{wellWisherId}"+ "}) RETURN EXISTS( (u)-[:WELLWISHER_OF]->(w) )")
-	Boolean checkRegisteredUserIsFollowed(@Param("userId") String userId, @Param("wellWishingId") String wellWisherId);
+	Boolean checkRegisteredUserIsFollowed(@Param("userId") String userId, @Param("wellWisherId") String wellWisherId);
 	
 	/**
 	 * Check a Friend relationship.
@@ -141,7 +141,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param registeredUserTwoUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	@Query("MATCH(p:RegisteredUser {userId: {registeredUserOneUserId}}), (b:RegisteredUser {userId: {registeredUserTwoUserId}}) RETURN EXISTS ((p)-[:FRIEND_OF]-(b))")
+	@Query("MATCH(p:RegisteredUser {userId: {registeredUserOneUserId}}), (b:RegisteredUser {userId: {registeredUserTwoUserId}}) RETURN EXISTS ((p)-[:FRIEND_OF]->(b))")
 	Boolean checkRegisteredUsersAreFriends(@Param("registeredUserOneUserId") String registeredUserOneUserId, @Param("registeredUserTwoUserId") String registeredUserTwoUserId);
 
 	

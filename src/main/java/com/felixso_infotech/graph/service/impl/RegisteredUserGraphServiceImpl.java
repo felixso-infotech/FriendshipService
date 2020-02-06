@@ -54,28 +54,43 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	    if(registeredUser1 == null)
 	    	registeredUser1=registeredUserGraphRepository.save(registeredUser);
 	    
-	    Boolean isWelwishing = false;	   
+	    Boolean isWelwishing = false;	
+	    Boolean isWelwishingBack = false;
+	    Boolean isFriends = false;
+	    Boolean isFriendsBack = false;
 	    
-    Boolean isWelwisher = registeredUserGraphRepository.checkRegisteredUserIsFollowed(currentUser1.getUserId(),registeredUser1.getUserId());
-    if(isWelwisher == false)
-     {
-            isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
+        Boolean isWelwisher = registeredUserGraphRepository.checkRegisteredUserIsFollowed(currentUser1.getUserId(),registeredUser1.getUserId());
+         if(isWelwisher == false)
+             isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
         	    
 	      if(isWelwisher)
 	      {
-	    	  isWelwishing = registeredUserGraphRepository.createWellWishing(currentUser1.getUserId(),registeredUser1.getUserId());
-	    	  //System.out.println("******************************"+isWelwishing);
+	    	  isWelwishing=registeredUserGraphRepository.checkRegisteredUserIsFollowing(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	  if(isWelwishing == false)
+	    	        isWelwishing = registeredUserGraphRepository.createWellWishing(currentUser1.getUserId(),registeredUser1.getUserId());
 	    	  
-	    	  Boolean isWelwishingUser = registeredUserGraphRepository.checkRegisteredUserIsFollowing(registeredUser1.getUserId(), currentUser1.getUserId());;
 	    	  
-	    	     if(isWelwishing && isWelwishingUser)
+	    	  if(isWelwishing == true)
+	    	     isWelwishingBack = registeredUserGraphRepository.checkRegisteredUserIsFollowing(registeredUser1.getUserId(), currentUser1.getUserId());
+	    	        
+	    	  
+	    	     if(isWelwishing && isWelwishingBack)
 	    	     {
-	    	    	 registeredUserGraphRepository.createWellwishingsAsFriend(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	    	 isFriends=registeredUserGraphRepository.checkRegisteredUsersAreFriends(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	    	 if(isFriends == false)
+	    	    	    registeredUserGraphRepository.createWellwishingsAsFriend(currentUser1.getUserId(),registeredUser1.getUserId());
+	    	    	 
+	    	    	 if(isFriends)
+	    	    	 {
+	    	    	   isFriendsBack = registeredUserGraphRepository.createWellwishingsAsFriend(registeredUser1.getUserId(),currentUser1.getUserId());
+	    	    	   if(isFriends && isFriendsBack)
+	    	    	       System.out.println(currentUser1.getUserId()+" and "+registeredUser1.getUserId()+"*********Become friends********\t\n");
+	    	    	 }  
 	    	     }
 	    	  
 	      } 	 
 	    
-       }   
+         
 	    
 	    if(isWelwisher && isWelwishing)
 		    return "Sucess";
