@@ -63,7 +63,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
          if(isWelwisher == false)
              isWelwisher = registeredUserGraphRepository.createWellWisher(currentUser1.getUserId(),registeredUser1.getUserId());
         	    
-	      if(isWelwisher)
+	      if(isWelwisher == true)
 	      {
 	    	  isWelwishing=registeredUserGraphRepository.checkRegisteredUserIsFollowing(currentUser1.getUserId(),registeredUser1.getUserId());
 	    	  if(isWelwishing == false)
@@ -74,7 +74,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	    	     isWelwishingBack = registeredUserGraphRepository.checkRegisteredUserIsFollowing(registeredUser1.getUserId(), currentUser1.getUserId());
 	    	        
 	    	  
-	    	     if(isWelwishing && isWelwishingBack)
+	    	     if(isWelwishing == true && isWelwishingBack == true)
 	    	     {
 	    	    	 isFriends=registeredUserGraphRepository.checkRegisteredUsersAreFriends(currentUser1.getUserId(),registeredUser1.getUserId());
 	    	    	 if(isFriends == false)
@@ -83,7 +83,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	    	    	 if(isFriends == true)
 	    	    	 {
 	    	    	   isFriendsBack = registeredUserGraphRepository.createWellwishingsAsFriend(registeredUser1.getUserId(),currentUser1.getUserId());
-	    	    	   if(isFriends && isFriendsBack)
+	    	    	   if(isFriends == true && isFriendsBack == true)
 	    	    	       System.out.println(currentUser1.getUserId()+" and "+registeredUser1.getUserId()+"*********Become friends********\t\n");
 	    	    	 }  
 	    	     }
