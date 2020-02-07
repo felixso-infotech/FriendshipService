@@ -80,7 +80,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	    	    	 if(isFriends == false)
 	    	    	    registeredUserGraphRepository.createWellwishingsAsFriend(currentUser1.getUserId(),registeredUser1.getUserId());
 	    	    	 
-	    	    	 if(isFriends)
+	    	    	 if(isFriends == true)
 	    	    	 {
 	    	    	   isFriendsBack = registeredUserGraphRepository.createWellwishingsAsFriend(registeredUser1.getUserId(),currentUser1.getUserId());
 	    	    	   if(isFriends && isFriendsBack)
