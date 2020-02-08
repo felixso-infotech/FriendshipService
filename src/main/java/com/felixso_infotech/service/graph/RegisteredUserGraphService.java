@@ -72,11 +72,11 @@ public interface RegisteredUserGraphService {
 	/**
 	 * Check a Friend relationship.
 	 *
-	 * @param registeredUserOneUserId the registered user id
-	 * @param registeredUserTwoUserId the registered user id
+	 * @param currentUserId the registered user id
+	 * @param registeredUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	public Boolean checkRegisteredUsersAreFriends(String registeredUserOneUserId, String registeredUserTwoUserId);
+	public Boolean checkRegisteredUsersAreFriends(String currentUserId,String registeredUserId);
 	
 
 	

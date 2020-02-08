@@ -140,10 +140,10 @@ public class RegisteredUserGraphResource {
 	 * @param registeredUserTwoUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserOneUserId}/{registeredUserTwoUserId}")
-	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserOneUserId,@PathVariable String registeredUserTwoUserId)
+	@GetMapping("/registeredUser/registeredUsers-AreFriends/{currentUserId}/{registeredUserId}")
+	public Boolean checkRegisteredUsersAreFriends(@PathVariable String currentUserId,@PathVariable String registeredUserId)
 	{
-		return registeredUserGraphService.checkRegisteredUsersAreFriends(registeredUserOneUserId,registeredUserTwoUserId);
+		return registeredUserGraphService.checkRegisteredUsersAreFriends(currentUserId,registeredUserId);
 	}
 
 	

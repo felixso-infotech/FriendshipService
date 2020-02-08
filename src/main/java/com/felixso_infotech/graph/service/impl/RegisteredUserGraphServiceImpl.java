@@ -194,9 +194,9 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	 * @return the FRIEND_OF registered user
 	 */
 	@Override
-	public Boolean checkRegisteredUsersAreFriends(String registeredUserOneUserId, String registeredUserTwoUserId) {
-		log.debug("get checkRegisteredUserIsFollowed:" + registeredUserOneUserId + " "+registeredUserTwoUserId);
-		return registeredUserGraphRepository.checkRegisteredUsersAreFriends(registeredUserOneUserId, registeredUserTwoUserId);
+	public Boolean checkRegisteredUsersAreFriends(String currentUserId,String registeredUserId) {
+		log.debug("get checkRegisteredUserIsFollowed:" + currentUserId + " "+registeredUserId);
+		return registeredUserGraphRepository.checkRegisteredUsersAreFriends(currentUserId,registeredUserId);
 	}
 	
 	

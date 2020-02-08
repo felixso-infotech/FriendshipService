@@ -80,8 +80,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param userId the registered user id
 	 * @return list of well wishing registered users
 	 */
-	@Query("MATCH (u:RegisteredUser{userId:" + " {userId} "
-			+ "}),(u)-[r:WELLWISHING_OF]-(wellwishing) RETURN wellwishing;")
+	@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHING_OF]-(wellwishing) WHERE u.userId ={userId} RETURN wellwishing;")
 	List<RegisteredUser> findAllWellWishingByUserId(@Param("userId") String userId);
 	
 
@@ -91,7 +90,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param userId the registered user id
 	 * @return count of well wishers registered users
 	 */
-	@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)-[r:WELLWISHER_OF]-(wellwishers) RETURN count(*) ")
+	@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)<-[r:WELLWISHER_OF]-(wellwishers) RETURN count(*) ")
 	Long countOfWellWishersByUserId(@Param("userId") String userId);
 	
 
@@ -101,7 +100,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param userId the registered user id
 	 * @return count of well wishing registered users
 	 */
-	@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)-[r:WELLWISHING_OF]-(wellwishing) RETURN count(*) ")
+	@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)<-[r:WELLWISHING_OF]-(wellwishing) RETURN count(*) ")
 	Long countOfWellWishingByUserId(@Param("userId") String userId);
 	
 
@@ -141,8 +140,8 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	 * @param registeredUserTwoUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	@Query("MATCH(p:RegisteredUser {userId: {registeredUserOneUserId}}), (b:RegisteredUser {userId: {registeredUserTwoUserId}}) RETURN EXISTS ((p)-[:FRIEND_OF]->(b))")
-	Boolean checkRegisteredUsersAreFriends(@Param("registeredUserOneUserId") String registeredUserOneUserId, @Param("registeredUserTwoUserId") String registeredUserTwoUserId);
+	@Query("MATCH(p:RegisteredUser {userId: {currentUserId}}), (b:RegisteredUser {userId: {registeredUserId}}) RETURN EXISTS ((p)-[:FRIEND_OF]->(b))")
+	Boolean checkRegisteredUsersAreFriends(@Param("currentUserId") String currentUserId, @Param("registeredUserId") String registeredUserId);
 
 	
 
