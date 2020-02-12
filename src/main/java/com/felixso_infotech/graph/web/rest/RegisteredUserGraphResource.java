@@ -4,10 +4,10 @@ package com.felixso_infotech.graph.web.rest;
 import java.net.URISyntaxException;
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.felixso_infotech.domain.graph.RegisteredUser;
 import com.felixso_infotech.domain.graph.RegisteredUserModel;
+import com.felixso_infotech.domain.graph.WellwisherAndRelationship;
 import com.felixso_infotech.service.graph.RegisteredUserGraphService;
 
 
@@ -65,6 +66,14 @@ public class RegisteredUserGraphResource {
 	@GetMapping("/registeredUser/well-Wishers/{userId}")
 	public List<RegisteredUser> findAllWellWishersByUserId(@PathVariable String userId) {
 		return registeredUserGraphService.findAllWellWishersByUserId(userId);
+	}
+	
+	@GetMapping("/registeredUser/well-Wishers-friends/{userId}")
+	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(@PathVariable String userId) {
+		
+		return registeredUserGraphService.findAllWellWishersWithFriendsByUserId(userId);
+		
+		
 	}
 	
 	/**

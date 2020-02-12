@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.felixso_infotech.domain.graph.RegisteredUser;
+import com.felixso_infotech.domain.graph.WellwisherAndRelationship;
 
 public interface RegisteredUserGraphService {
 	
@@ -23,6 +24,8 @@ public interface RegisteredUserGraphService {
 	 * @return list of well wisher registered users
 	 */
 	public List<RegisteredUser> findAllWellWishersByUserId(String userId);
+	
+	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(String userId);
 	
 	/**
 	 * Find all well wishing by registered user id

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.felixso_infotech.domain.graph.RegisteredUser;
+import com.felixso_infotech.domain.graph.WellwisherAndRelationship;
 import com.felixso_infotech.repository.graph.RegisteredUserGraphRepository;
 import com.felixso_infotech.service.graph.RegisteredUserGraphService;
 
@@ -111,6 +112,30 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 		log.debug("getall welwishers:" + userId );
 		return registeredUserGraphRepository.findAllWellWishersByUserId(userId);
 	}
+	
+	
+	@Override
+	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(String userId) {
+		
+		log.debug("getall welwishers with friends:" + userId );
+		
+		//System.out.println("******************************"+registeredUserGraphRepository.findAllWellWishersWithFriendsByUserId(userId)+"**************************");
+		
+		//List<RegisteredUser> regUser = registeredUserGraphRepository.findAllWellWishersWithFriendsByUserId(userId);
+		/*
+		 * for(RegisteredUser registeredUser : regUser) {
+		 * 
+		 * }
+		 */
+		
+		return registeredUserGraphRepository.findAllWellWishersWithFriendsByUserId(userId);
+	}
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Find all well wishing by registered user id

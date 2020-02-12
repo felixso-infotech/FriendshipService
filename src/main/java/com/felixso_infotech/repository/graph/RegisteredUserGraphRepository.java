@@ -2,12 +2,14 @@ package com.felixso_infotech.repository.graph;
 
 import java.util.List;
 
+
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.felixso_infotech.domain.graph.RegisteredUser;
+import com.felixso_infotech.domain.graph.WellwisherAndRelationship;
 
 @Repository
 public interface RegisteredUserGraphRepository extends Neo4jRepository<RegisteredUser, String> {
@@ -73,6 +75,9 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF]-(wellwishers) WHERE u.userId ={userId} RETURN wellwishers;")
 	List<RegisteredUser> findAllWellWishersByUserId(@Param("userId") String userId);
 	
+	
+	@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF]-(wellwishers)-[w:FRIEND_OF]->(u) WHERE u.userId ={userId} RETURN wellwishers,type(r) as wellWisherRel,type(w) as friendRel,properties(r) as wellWisherProperties,properties(w) as friendProperties;")
+	WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(@Param("userId") String userId);
 
 	/**
 	 * Find all well wishing by registered user id
@@ -143,6 +148,7 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	@Query("MATCH(p:RegisteredUser {userId: {currentUserId}}), (b:RegisteredUser {userId: {registeredUserId}}) RETURN EXISTS ((p)-[:FRIEND_OF]->(b))")
 	Boolean checkRegisteredUsersAreFriends(@Param("currentUserId") String currentUserId, @Param("registeredUserId") String registeredUserId);
 
+	
 	
 
 	

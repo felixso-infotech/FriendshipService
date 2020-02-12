@@ -1,10 +1,13 @@
 package com.felixso_infotech.domain.graph;
 
+
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
+
 
 @NodeEntity
 public class RegisteredUser {
@@ -20,8 +23,8 @@ public class RegisteredUser {
     @Index(unique = true)
     private String userId;
     
-	
-   
+
+       
     public RegisteredUser() {
 		
 	}
@@ -30,10 +33,12 @@ public class RegisteredUser {
 	public String toString() {
 		return "RegisteredUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userId=" + userId
 				+ "]";
-	}
-
+	}	
 	
-    public Long getId() {
+	
+   
+
+	public Long getId() {
         return id;
     }
 
@@ -80,42 +85,13 @@ public class RegisteredUser {
         this.userId = userId;
     }
     
-   
-
+	
     
     
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 	/*
 	 * @Relationship(type = "FRIEND_OF", direction = Relationship.DIRECTION) private
 	 * List<RegisteredUser> friends = new ArrayList<>();
@@ -142,7 +118,7 @@ public class RegisteredUser {
 	 * friends; }
 	 * 
 	 * public List<RegisteredUser> getFriends() { return friends; }
+	 * 
 	 */
-	
 
 }
