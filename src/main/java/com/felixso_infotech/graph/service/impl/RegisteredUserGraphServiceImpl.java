@@ -115,7 +115,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 	
 	
 	@Override
-	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(String userId) {
+	public List<WellwisherAndRelationship> findAllWellWishersWithFriendsByUserId(String userId) {
 		
 		log.debug("getall welwishers with friends:" + userId );
 		

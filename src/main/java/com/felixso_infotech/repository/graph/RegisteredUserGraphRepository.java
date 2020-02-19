@@ -76,8 +76,8 @@ public interface RegisteredUserGraphRepository extends Neo4jRepository<Registere
 	List<RegisteredUser> findAllWellWishersByUserId(@Param("userId") String userId);
 	
 	
-	@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF]-(wellwishers)-[w:FRIEND_OF]->(u) WHERE u.userId ={userId} RETURN wellwishers,type(r) as wellWisherRel,type(w) as friendRel,properties(r) as wellWisherProperties,properties(w) as friendProperties;")
-	WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(@Param("userId") String userId);
+	@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "})<-[r:WELLWISHER_OF]-(wellwishers) WITH wellwishers, CASE EXISTS((:RegisteredUser{userId:" + " {userId}" + "})<-[:FRIEND_OF]-(wellwishers)) WHEN true THEN \"FRIEND_OF\" ELSE \"WELLWISHER_OF\" END as wellWisherRel RETURN wellwishers,wellWisherRel;")		
+	List<WellwisherAndRelationship> findAllWellWishersWithFriendsByUserId(@Param("userId") String userId);
 
 	/**
 	 * Find all well wishing by registered user id

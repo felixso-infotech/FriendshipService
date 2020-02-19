@@ -1,7 +1,9 @@
 package com.felixso_infotech.domain.graph;
 
 
+
 import java.util.HashMap;
+
 import java.util.Map;
 
 import org.springframework.data.neo4j.annotation.QueryResult;
@@ -15,31 +17,20 @@ public class WellwisherAndRelationship {
     private String wellWisherRel;
     
     private Map<String,Boolean> wellWisherProperties = new HashMap<String,Boolean>();
-    
-    private String friendRel;
-    
-    private Map<String,Boolean> friendProperties = new HashMap<String,Boolean>();
        
-    
-	public String getFriendRel() {
-		return friendRel;
+   
+
+	public RegisteredUser getWellWishers() {
+		return wellWishers;
 	}
 
 
-	public void setFriendRel(String friendRel) {
-		this.friendRel = friendRel;
+	public void setWellWishers(RegisteredUser wellWishers) {
+		this.wellWishers = wellWishers;
 	}
 
 
-	public Map<String, Boolean> getFriendProperties() {
-		return friendProperties;
-	}
-
-
-	public void setFriendProperties(Map<String, Boolean> friendProperties) {
-		this.friendProperties = friendProperties;
-	}
-
+	
 
 	public String getWellWisherRel() {
 		return wellWisherRel;
@@ -68,14 +59,7 @@ public class WellwisherAndRelationship {
 	 */
 	
 
-	public RegisteredUser getWellWishers() {
-		return wellWishers;
-	}
-
-	public void setWellWishers(RegisteredUser wellWishers) {
-		this.wellWishers = wellWishers;
-	}
-
+	
 	
     
 

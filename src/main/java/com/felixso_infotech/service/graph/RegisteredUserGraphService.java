@@ -25,7 +25,7 @@ public interface RegisteredUserGraphService {
 	 */
 	public List<RegisteredUser> findAllWellWishersByUserId(String userId);
 	
-	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(String userId);
+	public List<WellwisherAndRelationship> findAllWellWishersWithFriendsByUserId(String userId);
 	
 	/**
 	 * Find all well wishing by registered user id

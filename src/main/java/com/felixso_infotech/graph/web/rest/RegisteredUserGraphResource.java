@@ -69,7 +69,7 @@ public class RegisteredUserGraphResource {
 	}
 	
 	@GetMapping("/registeredUser/well-Wishers-friends/{userId}")
-	public WellwisherAndRelationship findAllWellWishersWithFriendsByUserId(@PathVariable String userId) {
+	public List<WellwisherAndRelationship> findAllWellWishersWithFriendsByUserId(@PathVariable String userId) {
 		
 		return registeredUserGraphService.findAllWellWishersWithFriendsByUserId(userId);
 		
