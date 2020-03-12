@@ -1,0 +1,62 @@
+
+NEO4j QUERIES FOR PROJECT
+---------------------------
+
+refer : http://bigdatums.net/2016/12/18/delete-nodes-relationships-neo4j-database/
+        https://neo4j.com/docs/cypher-manual/current/clauses/delete/
+        https://www.tutorialspoint.com/neo4j/neo4j_cql_delete.htm
+
+
+@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF]-(wellwishers)<-[w:FRIEND_OF]-(u) WHERE u.userId ={userId} RETURN wellwishers,type(r) as wellWisherRel,type(w) as friendRel,properties(r) as wellWisherProperties,properties(w) as friendProperties;")
+
+MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) WHERE u.userId ="rithu" WITH wellwishers,CASE WHEN type(r)="FRIEND_OF" THEN "FRIEND_OF" ELSE "WELLWISHER_OF" END as wellWisherRel RETURN wellwishers,wellWisherRel;
+
+MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) MATCH (u)<-[r:FRIEND_OF]-(wellwishers) WHERE u.userId ="rithu" WITH wellwishers,CASE WHEN  type(r)="FRIEND_OF" THEN "FRIEND_OF" ELSE "WELLWISHER_OF" END as wellWisherRel RETURN COLLECT(DISTINCT wellwishers.userId),wellWisherRel;
+
+MATCH (u:RegisteredUser{userId:"rithu"})<-[r:WELLWISHER_OF]-(wellwishers) WITH wellwishers, CASE EXISTS((:RegisteredUser{userId:"rithu"})<-[:FRIEND_OF]-(wellwishers)) WHEN true THEN "FRIEND_OF" ELSE "WELLWISHER_OF" END as wellWisherRel RETURN wellwishers,wellWisherRel;
+
+MATCH (n:RegisteredUser{userId:"jose"})-[r:WELLWISHER_OF]->(wellwishers) RETURN  wellwishers;
+
+MATCH (n:RegisteredUser{userId:"jose"})<-[r:WELLWISHER_OF]-(wellwishers) RETURN  wellwishers;
+
+MATCH (u:RegisteredUser{userId:"rithu"})-[r:FRIEND_OF]-(w:RegisteredUser{userId:"jose"}) delete r RETURN EXISTS((u)-[:FRIEND_OF]-(w));
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+//use case
+
+MATCH (u:RegisteredUser{userId:"rithu"})<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) WITH wellwishers, CASE EXISTS((:RegisteredUser{userId:"rithu"})-[:FRIEND_OF]-(wellwishers)) WHEN true THEN "FRIEND_OF" ELSE "WELLWISHER_OF" END as wellWisherRel RETURN wellwishers,wellWisherRel;
+
+
+MATCH (u:RegisteredUser{userId:"rithu"})-[r:WELLWISHER_OF|FRIEND_OF]->(wellwishers) WITH wellwishers, CASE EXISTS((:RegisteredUser{userId:"rithu"})-[:FRIEND_OF]-(wellwishers)) WHEN true THEN "FRIEND_OF" ELSE "WELLWISHER_OF" END as wellWisherRel RETURN wellwishers,wellWisherRel;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//sanil made samples
+
+MATCH (u:RegisteredUser)-[r:WELLWISHER_OF|FRIEND_OF]->(wellwishers) Where u.userId = "rithu" RETURN count(*)
+
+MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) Where u.userId = "rithu" RETURN count(*)
+
+
+// delete node and relationships
+
+MATCH (n) DETACH DELETE n;
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+
+@Query("MATCH (u:RegisteredUser)<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) WHERE u.userId ={userId} WITH wellwishers,CASE WHEN type(r)=\"FRIEND_OF\" THEN \"FRIEND_OF\" ELSE \"WELLWISHER_OF\" END as wellWisherRel RETURN wellwishers,wellWisherRel;")
+
+@Query("MATCH (u:RegisteredUser)-[r:WELLWISHER_OF|FRIEND_OF]->(wellwishers) WHERE u.userId ={userId} WITH wellwishers,CASE WHEN type(r)=\\\"FRIEND_OF\\\" THEN \\\"FRIEND_OF\\\" ELSE \\\"WELLWISHER_OF\\\" END as wellWisherRel RETURN wellwishers,wellWisherRel;")
+
+@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)<-[r:WELLWISHER_OF|FRIEND_OF]-(wellwishers) RETURN count(*) ")
+
+
+@Query("MATCH (u:RegisteredUser{userId:" + " {userId}" + "}),(u)-[r:WELLWISHING_OF|FRIEND_OF]->(wellwishers) RETURN count(*) ")
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
