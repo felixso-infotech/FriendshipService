@@ -64,7 +64,7 @@ public class RegisteredUserGraphServiceImpl implements RegisteredUserGraphServic
 		}
 
 		else
-			return "fail something wrong";
+			return "Relationship already exist";
 
 	}
 	
